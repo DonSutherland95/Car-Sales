@@ -25,15 +25,23 @@ const App = (props) => {
   //     { id: 4, name: 'Rear spoiler', price: 250 }
   //   ]
   // };
+  const removeItem = item => {
+    // dispatch an action here to remove an item
+    props.removeFeature(item);
+  };
 
+  const buyItem = item => {
+    // dipsatch an action here to add an item
+    props.addFeature(item);
+  };
   return (
     <div className="boxes">
       <div className="box">
         <Header /*car={state.car}*/ car={props.car} />
-        <AddedFeatures /*car={state.car}*/ car={props.car} buyItem={removeFeature} />
+        <AddedFeatures /*car={state.car}*/ car={props.car} removeItem={removeItem} />
       </div>
       <div className="box">
-        <AdditionalFeatures /*additionalFeatures={state.additionalFeatures}*/ additionalFeatures={props.additionalFeatures} buyItem={addFeature}  />
+        <AdditionalFeatures /*additionalFeatures={state.additionalFeatures}*/ additionalFeatures={props.additionalFeatures} addItem={buyItem}  />
         <Total /*car={state.car} additionalPrice={state.additionalPrice}*/ car={props.car} additionalPrice={props.additionalPrice} />
       </div>
     </div>
@@ -41,7 +49,6 @@ const App = (props) => {
 };
 
 const mapStateToProps = (state) =>{
-  console.log(state)
   return {
     car: state.car,
     additionalFeatures: state.additionalFeatures,
@@ -49,4 +56,4 @@ const mapStateToProps = (state) =>{
   }
 }
 // export default App;
-export default connect(mapStateToProps,{addFeature, removeFeature})(App);
+export default connect(mapStateToProps,{addFeature, removeFeature},)(App);
